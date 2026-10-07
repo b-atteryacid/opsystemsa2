@@ -74,7 +74,7 @@ FORWARD _PROTOTYPE( void mlfq_sched, (struct proc *rp, int *queue, int *front) )
 /**
  * @brief A global constant which controls which scheduler will be utilized.
  */
-const int sched_policy = FCFS_SCHEDULER;
+const int sched_policy = RR_SCHEDULER;
 
 #define BuildMess(m_ptr, src, dst_ptr) \
 	(m_ptr)->m_source = (src); 					\
@@ -645,19 +645,30 @@ struct proc *rp;		/* this process is no longer runnable */
 
 PRIVATE void fcfs_sched (struct proc *rp, int *front) {
 
-    /*FCFS will put all procs at the back of the queue*/
+    /*FCFS will put all procs at the back of the queue regardless of prio*/
     *front = 0;
+
 
 }
 
 PRIVATE void rr_sched (struct proc *rp, int *front) {
-	
-	/* <<TODO>> */
+
+    /* only run for one quantum*/
+     rp->p_ticks_left = rp->p_quantum_size;
+     /* and put at back*/
+     *front = 0;
 
 }
 
 PRIVATE void mlfq_sched (struct proc *rp, int *queue, int *front) {
 
-	/* <<TODO>> */
+	/* will use the prio starting from 0 to 15 to put the proc into a queue, then
+     * move it down one queue if not finished */
+    *queue = rp->p_priority;
+    *front = 0;
+    if(rp->p_priority < 15) {
+        rp->p_priority++;
+    }
+
 
 }
