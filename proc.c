@@ -74,7 +74,7 @@ FORWARD _PROTOTYPE( void mlfq_sched, (struct proc *rp, int *queue, int *front) )
 /**
  * @brief A global constant which controls which scheduler will be utilized.
  */
-const int sched_policy = DEFAULT_SCHEDULER;
+const int sched_policy = FCFS_SCHEDULER;
 
 #define BuildMess(m_ptr, src, dst_ptr) \
 	(m_ptr)->m_source = (src); 					\
