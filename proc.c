@@ -74,7 +74,7 @@ FORWARD _PROTOTYPE( void mlfq_sched, (struct proc *rp, int *queue, int *front) )
 /**
  * @brief A global constant which controls which scheduler will be utilized.
  */
-const int sched_policy = RR_SCHEDULER;
+const int sched_policy = FCFS_SCHEDULER;
 
 #define BuildMess(m_ptr, src, dst_ptr) \
 	(m_ptr)->m_source = (src); 					\
@@ -647,6 +647,8 @@ PRIVATE void fcfs_sched (struct proc *rp, int *front) {
 
     /*FCFS will put all procs at the back of the queue regardless of prio*/
     *front = 0;
+    /*in fcfs, run until finished*/
+    rp->p_ticks_left = -1;
 
 
 }
