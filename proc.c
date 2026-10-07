@@ -439,6 +439,7 @@ register struct proc *rp;	/* this process is now runnable */
 			case FCFS_SCHEDULER:
 				fcfs_sched (rp, &front);
 				q = rp->p_priority;
+                break;
 	
 			case RR_SCHEDULER:
 				rr_sched (rp, &front);
