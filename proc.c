@@ -669,9 +669,12 @@ PRIVATE void mlfq_sched (struct proc *rp, int *queue, int *front) {
      * move it down one queue if not finished */
     *queue = rp->p_priority;
     *front = 0;
-    rp->p_ticks_left = rp->p_quantum_size;
-    if(rp->p_priority < 15 && !iskernelp(rp)) {
-        rp->p_priority++;
+
+    if(rp->p_ticks_left == 0) {
+        rp->p_ticks_left = rp->p_quantum_size;
+        if(rp->p_priority < 15 && !iskernelp(rp)) {
+            rp->p_priority++;
+        }
     }
 
 
