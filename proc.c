@@ -74,7 +74,7 @@ FORWARD _PROTOTYPE( void mlfq_sched, (struct proc *rp, int *queue, int *front) )
 /**
  * @brief A global constant which controls which scheduler will be utilized.
  */
-const int sched_policy = FCFS_SCHEDULER;
+const int sched_policy = MLFQ_SCHEDULER;
 
 #define BuildMess(m_ptr, src, dst_ptr) \
 	(m_ptr)->m_source = (src); 					\
@@ -668,6 +668,7 @@ PRIVATE void mlfq_sched (struct proc *rp, int *queue, int *front) {
      * move it down one queue if not finished */
     *queue = rp->p_priority;
     *front = 0;
+    rp->p_ticks_left = rp->p_quantum_size;
     if(rp->p_priority < 15) {
         rp->p_priority++;
     }
