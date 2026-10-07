@@ -673,12 +673,7 @@ PRIVATE void mlfq_sched (struct proc *rp, int *queue, int *front) {
         if(rp->p_priority < 15) {
             rp->p_priority++;
         }
-        *front = 0;
-    } else {
-        *front = 1;
     }
+    *front = 0;
     *queue = rp->p_priority;
-
-
-
 }
