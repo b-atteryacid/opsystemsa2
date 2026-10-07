@@ -644,8 +644,9 @@ struct proc *rp;		/* this process is no longer runnable */
 }
 
 PRIVATE void fcfs_sched (struct proc *rp, int *front) {
-	
-	/* <<TODO>> */
+
+    /*FCFS will put all procs at the back of the queue*/
+    *front = 0;
 
 }
 
