@@ -668,7 +668,7 @@ PRIVATE void mlfq_sched (struct proc *rp, int *queue, int *front) {
 	/* will use the prio starting from 0 to 15 to put the proc into a queue, then
      * move it down one queue if not finished */
     *queue = rp->p_priority;
-    *front = 0;
+    *front = 1;
     rp->p_ticks_left = rp->p_quantum_size;
     if(rp->p_priority < 15) {
         rp->p_priority++;
