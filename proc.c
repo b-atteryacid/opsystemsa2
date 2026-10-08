@@ -670,7 +670,7 @@ PRIVATE void mlfq_sched (struct proc *rp, int *queue, int *front) {
 
     if(rp->p_ticks_left == 0) {
         rp->p_ticks_left = rp->p_quantum_size;
-        if(rp->p_priority < 15) {
+        if(rp->p_priority < IDLE_Q-1) {
             rp->p_priority++;
         }
     }
