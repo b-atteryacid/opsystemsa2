@@ -656,10 +656,10 @@ PRIVATE void fcfs_sched (struct proc *rp, int *front) {
 
 PRIVATE void rr_sched (struct proc *rp, int *front) {
 
+    /* and put at back*/
+    *front = 0;
     /* only run for one quantum*/
      rp->p_ticks_left = rp->p_quantum_size;
-     /* and put at back*/
-     *front = 0;
 
 }
 
@@ -670,6 +670,7 @@ PRIVATE void mlfq_sched (struct proc *rp, int *queue, int *front) {
 
     if(rp->p_ticks_left == 0) {
         rp->p_ticks_left = rp->p_quantum_size;
+        /*reduce priority, but not below idle Q*/
         if(rp->p_priority < IDLE_Q-1) {
             rp->p_priority++;
         }
